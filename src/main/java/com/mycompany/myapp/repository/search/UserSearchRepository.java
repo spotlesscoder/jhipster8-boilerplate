@@ -1,7 +1,5 @@
 package com.mycompany.myapp.repository.search;
 
-import static org.springframework.data.elasticsearch.client.elc.QueryBuilders.queryStringQuery;
-
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryStringQuery;
 import com.mycompany.myapp.domain.User;
 import com.mycompany.myapp.repository.UserRepository;

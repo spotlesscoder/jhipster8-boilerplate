@@ -18,7 +18,6 @@ import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchPe
 import org.springframework.data.elasticsearch.core.mapping.SimpleElasticsearchPersistentProperty;
 import org.springframework.data.mapping.PersistentEntity;
 import org.springframework.data.mapping.model.Property;
-import org.springframework.data.mapping.model.PropertyNameFieldNamingStrategy;
 import org.springframework.data.mapping.model.SimpleTypeHolder;
 
 @Configuration

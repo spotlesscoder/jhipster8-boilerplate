@@ -1,6 +1,5 @@
 package com.mycompany.myapp;
 
-import com.mycompany.myapp.Jhipster8BoilerplateApp;
 import com.mycompany.myapp.config.AsyncSyncConfiguration;
 import com.mycompany.myapp.config.EmbeddedElasticsearch;
 import com.mycompany.myapp.config.EmbeddedMongo;
