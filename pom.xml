@@ -44,6 +44,7 @@
         <awaitility.version>4.2.0</awaitility.version>
         <checkstyle.version>10.12.1</checkstyle.version>
         <checksum-maven-plugin.version>1.11</checksum-maven-plugin.version>
+        <error-prone-maven-plugin.version>2.20.0</error-prone-maven-plugin.version>
         <frontend-maven-plugin.version>1.13.3</frontend-maven-plugin.version>
         <git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version>
         <hazelcast-spring.version>5.3.1</hazelcast-spring.version>
@@ -77,6 +78,7 @@
         <profile.tls/>
         <properties-maven-plugin.version>1.1.0</properties-maven-plugin.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <spotless-maven-plugin.version>2.37.0</spotless-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -283,7 +285,7 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.37.0</version>
+                <version>${spotless-maven-plugin.version}</version>
                 <configuration>
                     <java>
                         <removeUnusedImports />
@@ -508,7 +510,20 @@
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
+                        <compilerArgs>
+                            <arg>-XDcompilePolicy=simple</arg>
+                            <arg>-Xplugin:ErrorProne</arg>
+                        </compilerArgs>
                         <annotationProcessorPaths>
+                            <path>
+                                <groupId>com.google.errorprone</groupId>
+                                <artifactId>error_prone_core</artifactId>
+                                <version>${error-prone-maven-plugin.version}</version>
+                            </path>
+                            <!-- Other annotation processors go here.
+                            If 'annotationProcessorPaths' is set, processors will no longer be
+                            discovered on the regular -classpath; see also 'Using Error Prone
+                            together with other annotation processors' below. -->
                             <path>
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-configuration-processor</artifactId>
