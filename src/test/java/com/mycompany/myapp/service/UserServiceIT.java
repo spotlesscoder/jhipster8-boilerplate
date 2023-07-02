@@ -76,9 +76,10 @@ class UserServiceIT {
 
         maybeUser = userService.requestPasswordReset(user.getEmail());
         assertThat(maybeUser).isPresent();
-        assertThat(maybeUser.get().getEmail()).isEqualTo(user.getEmail());
-        assertThat(maybeUser.get().getResetDate()).isNotNull();
-        assertThat(maybeUser.get().getResetKey()).isNotNull();
+        User theUser = maybeUser.orElseThrow(() -> new NullPointerException());
+        assertThat(theUser.getEmail()).isEqualTo(user.getEmail());
+        assertThat(theUser.getResetDate()).isNotNull();
+        assertThat(theUser.getResetKey()).isNotNull();
     }
 
     @Test
@@ -130,9 +131,10 @@ class UserServiceIT {
 
         Optional<User> maybeUser = userService.completePasswordReset("johndoe2", user.getResetKey());
         assertThat(maybeUser).isPresent();
-        assertThat(maybeUser.get().getResetDate()).isNull();
-        assertThat(maybeUser.get().getResetKey()).isNull();
-        assertThat(maybeUser.get().getPassword()).isNotEqualTo(oldPassword);
+        User theUser = maybeUser.orElseThrow(() -> new NullPointerException());
+        assertThat(theUser.getResetDate()).isNull();
+        assertThat(theUser.getResetKey()).isNull();
+        assertThat(theUser.getPassword()).isNotEqualTo(oldPassword);
 
         userRepository.delete(user);
     }
